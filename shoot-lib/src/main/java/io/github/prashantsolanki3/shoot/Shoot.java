@@ -1,14 +1,19 @@
 package io.github.prashantsolanki3.shoot;
 
-import android.app.Application;
 import android.content.Context;
 import android.support.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.Date;
 
 import io.github.prashantsolanki3.shoot.listener.OnShootListener;
-import io.github.prashantsolanki3.shoot.preference.PM;
+
+import static io.github.prashantsolanki3.shoot.preference.PM.getIteration;
+import static io.github.prashantsolanki3.shoot.preference.PM.getRun;
+import static io.github.prashantsolanki3.shoot.preference.PM.setExecutionTime;
+import static io.github.prashantsolanki3.shoot.preference.PM.setIteration;
+import static io.github.prashantsolanki3.shoot.preference.PM.setRun;
 
 /**
  * Package io.github.prashantsolanki3.shoot
@@ -22,7 +27,7 @@ public class Shoot {
 
     public static Context context;
 
-    public static synchronized void with(Application context){
+    public static synchronized void with(Context context){
         Shoot.context = context;
     }
 
@@ -32,34 +37,42 @@ public class Shoot {
     }
 
     public static synchronized void once(String TAG, OnShootListener onShootListener) {
-        isInit();
-
-        if(PM.getRun(TAG)){
-            onShootListener.onExecute();
-        }
-
-        PM.setRun(TAG,true);
+        once(APP_INSTALL,TAG,onShootListener);
     }
  
 
     public static synchronized void once(@Scope int scope, String TAG, OnShootListener onShootListener) {
         isInit();
+
+        if(getRun(scope, TAG)){
+            onShootListener.onExecute(1);
+            setRun(scope,TAG, true);
+            setExecutionTime(scope, TAG, new Date().getTime());
+        }
     }
 
 
     public static synchronized void repeatAfter(int iterations, String Tag, OnShootListener onShootListener) {
-        isInit();
+        repeatAfter(APP_INSTALL,iterations,Tag,onShootListener);
     }
 
 
-    public static synchronized void repeatAfter(@Scope int scope, int iterations, String Tag, OnShootListener onShootListener) {
+    public static synchronized void repeatAfter(@Scope int scope, int iterations, String TAG, OnShootListener onShootListener) {
         isInit();
+        int iterationNo = getIteration(scope,TAG);
+
+        if(iterationNo%iterations==0){
+            onShootListener.onExecute(iterationNo+1);
+            setRun(scope,TAG,true);
+            setExecutionTime(scope, TAG, new Date().getTime());
+        }
+
+        setIteration(scope, TAG, iterationNo+1);
     }
 
 
     public static synchronized boolean isShot(String TAG) {
-        isInit();
-        return false;
+        return isShot(APP_INSTALL,TAG);
     }
 
  
@@ -80,12 +93,12 @@ public class Shoot {
     }*/
 
 
-    static final int THIS_APP_INSTALL = 0;
-    static final int THIS_APP_VERSION = 1;
+    public static final int APP_INSTALL = 0;
+    public static final int APP_VERSION = 1;
 
     @Retention(RetentionPolicy.SOURCE)
-    @IntDef({THIS_APP_INSTALL, THIS_APP_VERSION})
-    @interface Scope{
+    @IntDef({APP_INSTALL, APP_VERSION})
+    public  @interface Scope{
 
     }
 
