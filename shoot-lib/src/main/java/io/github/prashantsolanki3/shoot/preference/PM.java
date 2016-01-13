@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import java.security.InvalidParameterException;
 
 import io.github.prashantsolanki3.shoot.Shoot;
+import io.github.prashantsolanki3.shoot.utils.Scope;
 
 import static io.github.prashantsolanki3.shoot.Shoot.context;
 import static io.github.prashantsolanki3.shoot.Shoot.isInit;
@@ -37,42 +38,42 @@ public class PM {
 
     }
 
-    public static void setRun(@Shoot.Scope int scope,String TAG,boolean bool){
+    public static void setRun(@Scope int scope, String TAG, boolean bool){
         init();
         editor.putBoolean(getScopePrefix(scope)+PREFIX_RUN+TAG,bool);
         editor.commit();
     }
 
-    public static boolean getRun(@Shoot.Scope int scope,String TAG){
+    public static boolean getRun(@Scope int scope,String TAG){
         init();
         return pref.getBoolean(getScopePrefix(scope)+PREFIX_RUN+TAG,false);
     }
 
-    public static void setExecutionTime(@Shoot.Scope int scope,String TAG,long time){
+    public static void setExecutionTime(@Scope int scope,String TAG,long time){
         init();
 
         editor.putLong(getScopePrefix(scope)+PREFIX_TIME+TAG, time);
         editor.commit();
     }
 
-    public static long getExecutionTime(@Shoot.Scope int scope,String TAG){
+    public static long getExecutionTime(@Scope int scope,String TAG){
         init();
         return pref.getLong(getScopePrefix(scope)+PREFIX_TIME+TAG, -1);
     }
 
-    public static void setIteration(@Shoot.Scope int scope,String TAG,int iteration){
+    public static void setIteration(@Scope int scope,String TAG,int iteration){
         init();
 
         editor.putInt(getScopePrefix(scope)+PREFIX_ITERATION+TAG, iteration);
         editor.commit();
     }
 
-    public static int getIteration(@Shoot.Scope int scope,String TAG){
+    public static int getIteration(@Scope int scope,String TAG){
         init();
         return pref.getInt(getScopePrefix(scope)+PREFIX_ITERATION+TAG, -1);
     }
 
-    public static String getScopePrefix(@Shoot.Scope int scope){
+    public static String getScopePrefix(@Scope int scope){
         if (scope==Shoot.APP_INSTALL)
             return PREFIX_INSTALL;
         else if (scope==Shoot.APP_VERSION)

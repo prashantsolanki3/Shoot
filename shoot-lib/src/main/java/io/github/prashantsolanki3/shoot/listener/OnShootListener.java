@@ -1,5 +1,11 @@
 package io.github.prashantsolanki3.shoot.listener;
 
-public interface OnShootListener{
-        void onExecute(int executionNo);
+import io.github.prashantsolanki3.shoot.utils.Scope;
+
+public abstract class OnShootListener{
+
+    public abstract void onExecute(@Scope int scope,String TAG ,int timesExecuted);
+    public void onNotExecuted(@Scope int scope,String TAG, int timesExecuted){
+
+    }
 }

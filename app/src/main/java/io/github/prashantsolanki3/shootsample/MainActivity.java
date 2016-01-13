@@ -2,12 +2,16 @@ package io.github.prashantsolanki3.shootsample;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Toast;
+
+import io.github.prashantsolanki3.shoot.Shoot;
+import io.github.prashantsolanki3.shoot.listener.OnShootListener;
+import io.github.prashantsolanki3.shoot.utils.Scope;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,8 +26,22 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+
+                Shoot.repeatAfter(3, "test2", new OnShootListener() {
+
+                    @Override
+                    public void onExecute(@Scope int scope, String TAG, int timesExecuted) {
+                        Toast.makeText(getApplicationContext(),"Executed: "+TAG+" : "+ timesExecuted,Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNotExecuted(@Scope int scope, String TAG, int timesExecuted) {
+                        Toast.makeText(getApplicationContext(),"Not Executed: "+TAG+" : "+timesExecuted, Toast.LENGTH_SHORT).show();
+                    }
+
+                });
+
+
             }
         });
     }
