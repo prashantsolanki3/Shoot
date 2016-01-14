@@ -2,6 +2,7 @@ package io.github.prashantsolanki3.shoot.preference;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 
 import java.security.InvalidParameterException;
 
@@ -21,9 +22,9 @@ import static io.github.prashantsolanki3.shoot.Shoot.isInit;
  */
 public class PM {
     // Shared Preferences
-    static SharedPreferences pref;
+    static SharedPreferences pref=null;
     // Editor for Shared preferences
-    static SharedPreferences.Editor editor;
+    static SharedPreferences.Editor editor=null;
 
     private final static String PREFIX_RUN="run_",
             PREFIX_TIME="time_",
@@ -33,9 +34,11 @@ public class PM {
 
     public static void init(){
         isInit();
-        pref = context.getSharedPreferences("shoot_preferences", Context.MODE_PRIVATE);
-        editor = pref.edit();
-
+        if(pref==null||editor==null) {
+            pref = context.getSharedPreferences("shoot_preferences", Context.MODE_PRIVATE);
+            editor = pref.edit();
+            PREFIX_VERSION = PREFIX_VERSION+getVersionCode()+"_";
+        }
     }
 
     public static void setRun(@Scope int scope, String TAG, boolean bool){
@@ -80,6 +83,16 @@ public class PM {
             return PREFIX_VERSION;
         else
             throw new InvalidParameterException(scope+" is not a valid Scope");
+    }
+
+    public static int getVersionCode(){
+        init();
+        try {
+            return context.getPackageManager().getPackageInfo(context.getPackageName(),0).versionCode;
+        }catch (PackageManager.NameNotFoundException e){
+            e.printStackTrace();
+            return -1;
+        }
     }
 
 }

@@ -71,33 +71,22 @@ public class Shoot {
         setIteration(scope, TAG, iterationNo+1);
     }
 
-    public static synchronized boolean isShot(String TAG) {
-        return isShot(APP_INSTALL,TAG);
+    public static synchronized boolean isDone(String TAG) {
+        return isDone(APP_INSTALL,TAG);
     }
 
-    public static synchronized boolean isShot(@Scope int scope, String TAG) {
+    public static synchronized boolean isDone(@Scope int scope, String TAG) {
         isInit();
        return getRun(scope,TAG);
     }
 
-    public static synchronized long lastShotTime(String TAG){
-        return lastShotTime(APP_INSTALL,TAG);
+    public static synchronized long getLastExecutionTime(String TAG){
+        return getLastExecutionTime(APP_INSTALL,TAG);
     }
 
-    public static synchronized long lastShotTime(@Scope int scope, String TAG){
+    public static synchronized long getLastExecutionTime(@Scope int scope, String TAG){
         isInit();
         return getExecutionTime(scope,TAG);
     }
-
-    //TODO: Shoot at a specific time. See Android-Job.
-    /*
-    public static synchronized void at(String TAG, long time, OnShootListener onShootListener) {
-        isInit();
-    }
-
-    public static synchronized void at(String TAG, int time, OnShootListener onShootListener) {
-        isInit();
-    }
-    */
 
 }

@@ -30,13 +30,13 @@ public class MainActivity extends AppCompatActivity {
                 Shoot.repeatAfter(3, "test2", new OnShootListener() {
 
                     @Override
-                    public void onExecute(@Scope int scope, String TAG, int timesExecuted) {
-                        Toast.makeText(getApplicationContext(),"Executed: "+TAG+" : "+ timesExecuted,Toast.LENGTH_SHORT).show();
+                    public void onExecute(@Scope int scope, String TAG, int iterationCount) {
+                        Toast.makeText(getApplicationContext(),"Executed: "+TAG+" : "+ iterationCount,Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
-                    public void onNotExecuted(@Scope int scope, String TAG, int timesExecuted) {
-                        Toast.makeText(getApplicationContext(),"Not Executed: "+TAG+" : "+timesExecuted, Toast.LENGTH_SHORT).show();
+                    public void onNotExecuted(@Scope int scope, String TAG, int iterationCount) {
+                        Toast.makeText(getApplicationContext(),"Not Executed: "+TAG+" : "+ iterationCount, Toast.LENGTH_SHORT).show();
                     }
 
                 });
