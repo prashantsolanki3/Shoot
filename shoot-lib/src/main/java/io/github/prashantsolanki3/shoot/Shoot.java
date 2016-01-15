@@ -27,9 +27,16 @@ public class Shoot {
     public static Context context;
     public static final int APP_INSTALL = 0;
     public static final int APP_VERSION = 1;
+    public static String preferenceFile;
 
     public static synchronized void with(Context context){
         Shoot.context = context;
+        preferenceFile = null;
+    }
+
+    public static synchronized void with(Context context,String preferenceFile){
+        Shoot.context = context;
+        Shoot.preferenceFile = preferenceFile;
     }
 
     public static void isInit(){

@@ -35,7 +35,12 @@ public class PM {
     public static void init(){
         isInit();
         if(pref==null||editor==null) {
-            pref = context.getSharedPreferences("shoot_preferences", Context.MODE_PRIVATE);
+
+            if(Shoot.preferenceFile!=null&&!Shoot.preferenceFile.isEmpty())
+                    pref = context.getSharedPreferences(Shoot.preferenceFile, Context.MODE_PRIVATE);
+            else
+                    pref = context.getSharedPreferences("shoot_preferences", Context.MODE_PRIVATE);
+
             editor = pref.edit();
             PREFIX_VERSION = PREFIX_VERSION+getVersionCode()+"_";
         }
