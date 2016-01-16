@@ -9,7 +9,7 @@ Run a method once or repeat after some iterations. Super simple, One liners.
 
 ## Add to your project
 
-[![Release](https://img.shields.io/github/release/prashantsolanki3/Shoot.svg?label=jitpack)](https://jitpack.io/#prashantsolanki3/Snap-RecyclerView-Utils)
+[![Release](https://img.shields.io/github/release/prashantsolanki3/Shoot.svg?label=jitpack)](https://jitpack.io/#prashantsolanki3/Shoot)
 
 Add JitPack to repositories in your project's root `build.gradle` file:
 
