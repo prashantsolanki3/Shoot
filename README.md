@@ -9,7 +9,7 @@ Run a method once or repeat after some iterations. Super simple, One liners.
 
 ## Add to your project
 
-[![Release](https://img.shields.io/github/release/prashantsolanki3/Snap-RecyclerView-Utils.svg?label=jitpack)](https://jitpack.io/#prashantsolanki3/Snap-RecyclerView-Utils)
+[![Release](https://img.shields.io/github/release/prashantsolanki3/Shoot.svg?label=jitpack)](https://jitpack.io/#prashantsolanki3/Snap-RecyclerView-Utils)
 
 Add JitPack to repositories in your project's root `build.gradle` file:
 
@@ -83,7 +83,7 @@ Shoot.once(Shoot.APP_VERSION,"UNIQUE_TAG", new OnShootListener() {
 
 Contribute by creating issues (tagged enhancement, bugs) in the repo or create a pull request.
 
-##Using Shoot in you app? 
+##Using Shoot in your app? 
 
 If you are using Shoot in your app and would like to be listed here, please let us know opening a new issue!
 
